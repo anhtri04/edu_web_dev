@@ -1,0 +1,31 @@
+{
+  "name": "edu_dev",
+  "version": "1.0.0",
+  "description": "web-app for school management",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon --inspect src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anhtri04/edu_web_dev.git"
+  },
+  "keywords": [
+    "EDU"
+  ],
+  "author": "NguyenAnhTri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anhtri04/edu_web_dev/issues"
+  },
+  "homepage": "https://github.com/anhtri04/edu_web_dev#readme",
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.1",
+    "nodemon": "^3.1.9"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0"
+  }
+}
