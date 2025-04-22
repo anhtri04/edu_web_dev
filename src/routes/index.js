@@ -1,3 +1,5 @@
+
+
 const welcomeRouter = require('./welcome')
 
 
@@ -5,7 +7,8 @@ function route(app) {
     
   
     
-    app.use('/welcome', welcomeRouter)
+    app.use('/', welcomeRouter)
+    app.use('/login', welcomeRouter)
     // app.use('/news', newsRouter)
     // app.use('/courses', courseRouter)
     // app.use('/', siteRouter)

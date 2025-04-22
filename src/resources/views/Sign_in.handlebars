@@ -1,52 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Login / Signup</title>
-  <link rel="stylesheet" href="/styles.css">
-</head>
-<body>
-  <div class="container" id="container">
-    <div class="form-container sign-up-container">
-      <form action="/signup" method="POST">
-        <h1>Create Account</h1>
-        <input type="text" name="username" placeholder="Username" required />
-        <input type="password" name="password" placeholder="Password" required />
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
-    <div class="form-container sign-in-container">
-      <form action="/login" method="POST">
-        <h1>Sign in</h1>
-        <input type="text" name="username" placeholder="Username" required />
-        <input type="password" name="password" placeholder="Password" required />
-        <button type="submit">Log In</button>
-      </form>
-    </div>
-    <div class="overlay-container">
-      <div class="overlay">
-        <div class="overlay-panel overlay-left">
-          <h1>Welcome Back!</h1>
-          <p>To keep connected with us, please login</p>
-          <button class="ghost" id="signIn">Log In</button>
-        </div>
-        <div class="overlay-panel overlay-right">
-          <h1>Hello, Friend!</h1>
-          <p>Enter your details and start your journey with us</p>
-          <button class="ghost" id="signUp">Sign Up</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const container = document.getElementById('container');
-    document.getElementById('signUp').addEventListener('click', () =>
-      container.classList.add('right-panel-active')
-    );
-    document.getElementById('signIn').addEventListener('click', () =>
-      container.classList.remove('right-panel-active')
-    );
-  </script>
-</body>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,minimum-scale=1">
+		<title>Login</title>
+        <!-- the form awesome library is used to add icons to our form -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+        <!-- include the stylesheet file -->
+        <link href="/style.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div class="login">
+			<h1>Login</h1>
+			<form action="/login" method="post">
+				<label for="username">
+					<!-- font awesome icon -->
+					<i class="fas fa-user"></i>
+				</label>
+				<input type="text" name="username" placeholder="Username" id="username" required>
+				<label for="password">
+					<i class="fas fa-lock"></i>
+				</label>
+				<input type="password" name="password" placeholder="Password" id="password" required>
+				<input type="submit" value="Login">
+			</form>
+		</div>
+	</body>
 </html>
