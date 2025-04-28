@@ -1,11 +1,19 @@
-const express = require('express')
-const router = express.Router()
-const welcomeController = require('../app/controllers/WelcomeController')
+const express = require('express');
+const router = express.Router();
+const session = require('express-session')
+const WelcomeController = require('../app/controllers/WelcomeController');
 
+// Welcome route with authentication middleware
+router.get('/welcome', WelcomeController.isAuthenticated, WelcomeController.showWelcome);
 
-router.post('/login', welcomeController.login)
-// router.post('/signup', welcomeController.signup)
-router.get('/welcome', welcomeController.show)
-// router.get('/', welcomeController.show)
+// Account route with authentication middleware
+router.get('/account', WelcomeController.isAuthenticated, WelcomeController.showAccount);
 
-module.exports = router
+// Home route
+router.get('/', (req, res) => {
+    res.render('home', { title: 'Home', student: req.session ? req.session.student : null });
+  });
+  
+  
+
+module.exports = router;

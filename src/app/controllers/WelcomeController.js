@@ -1,44 +1,21 @@
-const mysql = require('mysql')
-const session = require('express-session')
-const connection = require('../../config/db')
-
-
-class WelcomeController{
-
-    show(req, res) {
-        res.render('Sign_in')
+class WelcomeController {
+    // Middleware to check if student is logged in
+    static isAuthenticated(req, res, next) {
+      if (req.session.student) {
+        return next();
       }
-
-    login(req, res) {
-        
-        let username = req.body.username
-        let password = req.body.password
-    
-        if (username && password) {
-            connection.query(
-                'SELECT * FROM students WHERE student_name = ? AND password = ?',
-                [username, password],   
-                function (error, results, fields) {
-                    if (error) throw error
-    
-                    if (results.length > 0) {
-                        req.session.loggedin = true
-                        req.session.username = username
-                        res.redirect('/home')
-                    } else {
-                        res.send('Incorrect Username and/or Password!')
-                    }
-                    res.end()
-                }
-            )
-        } else {
-            res.send('Please enter Username and Password!')
-            res.end()
-        }
+      res.redirect('/login');
     }
-    
-    
-    
-}
+  
+    // GET /welcome
+    static showWelcome(req, res) {
+      console.log('GET /welcome route hit');
+      res.render('home', { title: 'Welcome', student: req.session.student });
+    }
 
-module.exports = new WelcomeController
+    static showAccount(req, res) {
+      res.render('account', { title: 'Account', student: req.session.student }); 
+    }
+  }
+  
+  module.exports = WelcomeController;

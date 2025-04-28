@@ -1,12 +1,11 @@
-const mysql = require('mysql');
 
-const db = mysql.createConnection({
+
+const { Sequelize } = require('sequelize');
+
+const sequelize = new Sequelize('edu_db_dev', 'root', '#BvOBV0332325650', {
   host: 'localhost',
-  user: 'root',
-  password: '#BvOBV0332325650', // your MySQL password
-  database: 'edu_db_dev'
+  dialect: 'mysql',
+  logging: false, // Set to true if you want to see SQL queries
 });
 
-
-
-module.exports = db;
+module.exports = sequelize;

@@ -1,29 +1,28 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width,minimum-scale=1">
-		<title>Login</title>
-        <!-- the form awesome library is used to add icons to our form -->
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-        <!-- include the stylesheet file -->
-        <link href="/style.css" rel="stylesheet" type="text/css">
-	</head>
-	<body>
-		<div class="login">
-			<h1>Login</h1>
-			<form action="/login" method="post">
-				<label for="username">
-					<!-- font awesome icon -->
-					<i class="fas fa-user"></i>
-				</label>
-				<input type="text" name="username" placeholder="Username" id="username" required>
-				<label for="password">
-					<i class="fas fa-lock"></i>
-				</label>
-				<input type="password" name="password" placeholder="Password" id="password" required>
-				<input type="submit" value="Login">
-			</form>
-		</div>
-	</body>
-</html>
+<div class="container mx-auto p-4">
+  <h1 class="text-2xl font-bold mb-4">{{title}}</h1>
+  {{#if error}}
+    <p class="text-red-500 mb-4">{{error}}</p>
+  {{/if}}
+  <form method="POST" action="{{#if isSignup}}/signup{{else}}/login{{/if}}" class="space-y-4">
+    {{#if isSignup}}
+      <div>
+        <label for="student_id" class="block text-sm font-medium">Student ID</label>
+        <input type="number" name="student_id" id="student_id" class="border rounded p-2 w-full" required />
+      </div>
+      <div>
+        <label for="student_name" class="block text-sm font-medium">Name</label>
+        <input type="text" name="student_name" id="student_name" class="border rounded p-2 w-full" required />
+      </div>
+    {{/if}}
+    <div>
+      <label for="email" class="block text-sm font-medium">Email</label>
+      <input type="email" name="email" id="email" class="border rounded p-2 w-full" required />
+    </div>
+    <div>
+      <label for="password" class="block text-sm font-medium">Password</label>
+      <input type="password" name="password" id="password" class="border rounded p-2 w-full" required />
+    </div>
+    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">{{title}}</button>
+    <a href="/signup" class="text-blue-500 hover:underline">Sign Up</a>
+  </form>
+</div>

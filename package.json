@@ -22,12 +22,16 @@
   },
   "homepage": "https://github.com/anhtri04/edu_web_dev#readme",
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.4",
+    "bcrypt": "^5.1.1",
     "express": "^5.1.0",
     "express-handlebars": "^8.0.1",
+    "mysql2": "^3.14.1",
     "nodemon": "^3.1.9",
     "sass": "^1.86.3",
     "sequelize": "^6.37.7",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "tailwindcss": "^4.1.4"
   },
   "devDependencies": {
     "express-session": "^1.18.1",
