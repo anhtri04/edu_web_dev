@@ -22,6 +22,10 @@ const Class = sequelize.define('Class', {
     type: DataTypes.STRING(255),
     allowNull: false,
   },
+  imageUrl: {
+    type: DataTypes.STRING(255),
+    allowNull: true, // Stores the Cloudinary URL (e.g., https://res.cloudinary.com/your-cloud-name/image/upload/...)
+},
 }, {
   tableName: 'classes',
   timestamps: false,

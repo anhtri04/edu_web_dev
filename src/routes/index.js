@@ -14,6 +14,7 @@ function route(app) {
     app.use('/signup', signUpRouter)
     app.use('/login', authRouter)
     app.use('/logout', authRouter)
+    
     app.use('/', welcomeRouter)
 
 }

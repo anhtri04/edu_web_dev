@@ -14,7 +14,6 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', AuthController.login);
-router.get('/logout', AuthController.logout);
 
 
 
