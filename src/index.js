@@ -4,6 +4,8 @@ const morgan = require('morgan')
 const { engine } = require('express-handlebars')
 const session = require('express-session');
 
+require('dotenv').config(); // Load .env variables
+
 
 const app = express()
 const port = 3000
@@ -11,6 +13,14 @@ const port = 3000
 const route = require('./routes')
 const sequelize = require('./config/db/index')
 require('./app/models'); // Import models to ensure relationships are defined
+
+
+// // Debug environment variables
+// console.log('Environment Variables:', {
+//   CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
+//   CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY,
+//   CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET ? '[REDACTED]' : undefined,
+// });
 
 // Debug middleware to log all requests
 app.use((req, res, next) => {

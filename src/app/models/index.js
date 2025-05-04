@@ -1,5 +1,7 @@
 const Student = require('./Student');
 const Class = require('./Class');
+const Teacher = require('./Teacher');
+
 
 // Define the many-to-many relationship
 Student.belongsToMany(Class, {
@@ -16,4 +18,13 @@ Class.belongsToMany(Student, {
   onDelete: 'CASCADE',
 });
 
-module.exports = { Student, Class };
+// Teacher ↔ Class (one-to-many)
+Teacher.hasMany(Class, {
+  foreignKey: 'teacher_id',
+  onDelete: 'SET NULL',
+});
+Class.belongsTo(Teacher, {
+  foreignKey: 'teacher_id',
+});
+
+module.exports = { Student, Class, Teacher };

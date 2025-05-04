@@ -12,6 +12,7 @@ h2 {
 
 .card-course-item {
   margin-top: 16px;
+  display: flex;
 }
 
 /*# sourceMappingURL=app.css.map */

@@ -3,8 +3,27 @@ const cloudinary = require('../../config/cloudinary');
 const { v4: uuidv4 } = require('uuid');
 
 class CourseController{
+
+    
+
+    static async detail(req, res, next) {
+        try {
+            const classes = await Class.findOne({
+                where: { slug: req.params.slug }
+            });
+
+            if (!classes) {
+                return res.status(404).send('Course not found');
+              }
+              const plainClasses = classes.toJSON(); // to deal with Handlebars' strict prototype access restrictions 
+              res.render('courses/detail', { classes: plainClasses });
+        } catch (error) {
+            next(error);
+        }
+    }
+
     static show(req, res){
-        res.render('course', {Class})
+        res.render('courses/createCourse', {Class})
     }
 
 
@@ -21,8 +40,13 @@ class CourseController{
 
     static async create(req, res, next) {
         try {
-            const { name, description } = req.body;
+            const { class_id, class_name, description, semester, teacher, slug } = req.body;
             let imageUrl = null;
+            
+            // Validate required fields
+            if ( !class_name || !slug) {
+                throw new Error('Class Name, and Slug are required');
+            }
 
             if (req.file) {
                 const file = req.file;
@@ -44,18 +68,25 @@ class CourseController{
             }
 
             const newClass = await Class.create({
-                name,
+                class_id,
+                class_name,
                 description,
+                semester,
+                teacher,
                 imageUrl,
+                slug
             });
 
-            res.redirect('/');
+            res.redirect(`/course/${slug}`);
+
         } catch (error) {
             next(error);
         }
     }
 
-
+    static async dashboard() {
+        
+    }
 
 
 }

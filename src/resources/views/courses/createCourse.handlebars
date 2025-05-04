@@ -1,0 +1,23 @@
+<h1>Create a New Class</h1>
+<form action="/course/add-course" method="POST" enctype="multipart/form-data">
+
+    <label for="class_name">Class Name:</label>
+    <input type="text" id="class_name" name="class_name" required><br>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description"></textarea><br>
+
+    <label for="semester">Semester:</label>
+    <input type="text" id="semester" name="semester"><br>
+
+    <label for="teacher">Teacher:</label>
+    <input type="text" id="teacher" name="teacher"><br>
+
+    <label for="slug">Slug:</label>
+    <input type="text" id="slug" name="slug" required><br>
+
+    <label for="image">Upload Image:</label>
+    <input type="file" id="image" name="image" accept="image/*"><br>
+
+    <button type="submit">Create Class</button>
+</form>

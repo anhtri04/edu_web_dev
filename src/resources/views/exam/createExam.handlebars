@@ -1,0 +1,21 @@
+<h1>Create a New Exam</h1>
+<form action="/exam/add-exam" method="POST" enctype="multipart/form-data">
+
+    <label for="class_name">Title:</label>
+    <input type="text" id="class_name" name="class_name" required><br>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description"></textarea><br>
+
+    <label for="semester">Material:</label>
+    <input type="text" id="semester" name="semester"><br>
+
+    <label for="teacher">Deadline:</label>
+    <input type="text" id="teacher" name="teacher"><br>
+
+    <label for="slug">Slug:</label>
+    <input type="text" id="slug" name="slug" required><br>
+
+
+    <button type="submit">Create Class</button>
+</form>

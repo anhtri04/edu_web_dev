@@ -14,7 +14,7 @@ class WelcomeController {
     }
 
     static showAccount(req, res) {
-      res.render('account', { title: 'Account', student: req.session.student }); 
+      res.render('account/account', { title: 'Account', student: req.session.student }); 
     }
   }
   
