@@ -12,6 +12,7 @@ const Teacher = sequelize.define('Teacher', {
     },
     isTeacher: {
         type: DataTypes.BOOLEAN,
+        defaultValue: true,
     },
     password: {
       type: DataTypes.STRING(255),

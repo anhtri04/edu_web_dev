@@ -2,6 +2,7 @@ const { Student } = require('../models');
 const bcrypt = require('bcrypt');
 
 class AuthController {
+
   static showSignup(req, res) {
     res.render('sign_in', { title: 'Sign Up', isSignup: true });
   }

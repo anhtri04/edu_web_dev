@@ -1,3 +1,5 @@
+
+
 class WelcomeController {
     // Middleware to check if student is logged in
     static isAuthenticated(req, res, next) {

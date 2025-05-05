@@ -1,17 +1,17 @@
-const express = require('express')
-const path = require('path')
-const morgan = require('morgan')
-const { engine } = require('express-handlebars')
+const express = require('express');
+const path = require('path');
+const morgan = require('morgan');
+const { engine } = require('express-handlebars');
 const session = require('express-session');
 
 require('dotenv').config(); // Load .env variables
 
 
-const app = express()
-const port = 3000
+const app = express();
+const port = 3000;
 
-const route = require('./routes')
-const sequelize = require('./config/db/index')
+const route = require('./routes');
+const sequelize = require('./config/db/index');
 require('./app/models'); // Import models to ensure relationships are defined
 
 
@@ -54,20 +54,20 @@ app.use(session({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, 'public')))
-app.use(express.urlencoded())
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded());
 
 // Template engine
-app.engine('handlebars', engine({ extname: '.handlebars' })) // Use engine() and set extension
-app.set('view engine', 'handlebars')
-app.set('views', path.join(__dirname, 'resources','views'))
+app.engine('handlebars', engine({ extname: '.handlebars' })); // Use engine() and set extension
+app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'resources','views'));
 
 
 
 // Routes init
 console.log('Routes loaded:', route); // Debug: Confirm routes are loaded
-route(app)
+route(app);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+  console.log(`Example app listening on port ${port}`);
 })

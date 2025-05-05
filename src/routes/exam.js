@@ -10,4 +10,4 @@ router.get('/submit', ExamController.submit)
 router.post('/submit', ExamController.submitted)
 
 
-module.exports = ExamController;
+module.exports = router;

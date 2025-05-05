@@ -28,7 +28,12 @@ const Class = sequelize.define('Class', {
   },
   teacher_id: {
     type: DataTypes.INTEGER,
-    allowNull: false,
+    allowNull: true,
+    references: {
+      model: 'teacher',
+      key: 'teacher_id'
+    },
+    onDelete: 'SET NULL',
   },
 
 }, {

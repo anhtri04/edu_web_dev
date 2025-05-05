@@ -1,4 +1,4 @@
-const Class = require('../models/Class')
+const Class = require('../models/Class');
 const cloudinary = require('../../config/cloudinary');
 const { v4: uuidv4 } = require('uuid');
 
@@ -23,7 +23,7 @@ class CourseController{
     }
 
     static show(req, res){
-        res.render('courses/createCourse', {Class})
+        res.render('courses/createCourse', {Class});
     }
 
 
