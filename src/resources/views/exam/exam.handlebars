@@ -1,21 +1,27 @@
-<div class="mt4">
-    <div class="row">
-        {{#each exam}}
-        <div class="col-sm-6 col-lg-4">
-            <div class="card card-course-item" >
-                <a href="/course/{{this.slug}}">
-                    <img class="card-img-top" src="{{this.imageUrl}}" alt="{{this.class_name}}">
-                </a>
-                <div class="card-body">
-                    <a href="/course/{{this.slug}}">
-                        <h5 class="card-title">{{this.title}}</h5>
-                        <h6>{{this.deadline}}</h6>
-                    </a>                   
-                    <p class="card-text">{{this.description}}</p>
-                    <a href="/course/{{this.slug}}" class="btn btn-primary">Enroll</a>
-                </div>
+<div class="container-courses">
+        <h1>Available Exams</h1>
+        <div class="mt4">
+            <div class="row">
+                {{#if exams.length}}
+                    {{#each exams}}
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="card-course-item">
+                            <a href="/course/{{this.slug}}">
+                                <img class="card-img-top" src="{{this.imageUrl}}" alt="{{this.class_name}}">
+                            </a>
+                            <div class="card-body">
+                                <a href="/course/{{this.slug}}">
+                                    <h5 class="card-title">{{this.title}}</h5>
+                                </a>
+                                <p class="card-text">{{this.description}}</p>
+                                <a href="/course/{{this.slug}}" class="btn btn-primary">Enroll</a>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                {{else}}
+                    <p class="no-courses">No exams available at the moment.</p>
+                {{/if}}
             </div>
         </div>
-        {{/each}}
     </div>
-</div>

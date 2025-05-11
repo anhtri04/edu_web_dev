@@ -1,13 +1,7 @@
 
 
 class WelcomeController {
-    // Middleware to check if student is logged in
-    static isAuthenticated(req, res, next) {
-      if (req.session.student) {
-        return next();
-      }
-      res.redirect('/login');
-    }
+    
   
     // GET /welcome
     static showWelcome(req, res) {
@@ -18,6 +12,17 @@ class WelcomeController {
     static showAccount(req, res) {
       res.render('account/account', { title: 'Account', student: req.session.student }); 
     }
+
+    static dashboard(req, res) {
+
+      if (!req.session.teacher) {
+        return res.redirect('/login/teacher');
+    }
+
+      res.render('teacherView/dashboard', {teacher: req.session.teacher})
+    }
+
+
   }
   
   module.exports = WelcomeController;

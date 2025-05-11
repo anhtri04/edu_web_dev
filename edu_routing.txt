@@ -1,0 +1,27 @@
+ROUTING
+
+//Teacher:  http://localhost:3000/teacher
+
+http://localhost:3000/teacher
+http://localhost:3000/teacher/login
+http://localhost:3000/teacher/dashboard
+http://localhost:3000/teacher/notification
+http://localhost:3000/teacher/course
+http://localhost:3000/teacher/add-course
+http://localhost:3000/teacher/course/:slug/exam
+http://localhost:3000/teacher/course/:slug/add-exam
+http://localhost:3000/teacher/notification
+
+
+
+//Student:   http://localhost:3000/student
+
+http://localhost:3000/student
+http://localhost:3000/student/notification
+http://localhost:3000/student/account
+http://localhost:3000/student/calendar
+http://localhost:3000/student/course
+http://localhost:3000/student/course/:slug
+http://localhost:3000/student/course/:slug/exam
+http://localhost:3000/student/course/:slug/exam/:slug
+http://localhost:3000/student/course/:slug/exam/submission

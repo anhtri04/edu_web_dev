@@ -15,6 +15,6 @@ router.get('/', (req, res) => {
 
 router.post('/', AuthController.login);
 
-
-
+router.get('/teacher', AuthController.teacherShowLogin);
+router.post('/teacher', AuthController.teacherLogin);
 module.exports = router;

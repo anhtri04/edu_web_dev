@@ -1,7 +1,11 @@
 const { Student } = require('../models');
+const { Teacher } = require('../models');
+
 const bcrypt = require('bcrypt');
 
 class AuthController {
+
+  
 
   static showSignup(req, res) {
     res.render('sign_in', { title: 'Sign Up', isSignup: true });
@@ -45,6 +49,57 @@ class AuthController {
       res.render('sign_in', { title: 'Login', isSignup: false, error: error.message });
     }
   }
+
+  static teacherShowLogin(req, res) {
+    res.render('auth/teacherLogin', { error: null });
+  }
+
+  static async teacherLogin(req, res) {
+    const { email, password } = req.body;
+
+    try {
+        // Find teacher by email
+        const teacher = await Teacher.findOne({ where: { email } });
+
+        if (!teacher) {
+            return res.render('auth/teacherLogIn', {  
+                error: 'Invalid email or password'
+            });
+        }
+
+        // Check if user is a teacher
+        if (teacher.isTeacher === null || teacher.isTeacher === 0) {
+            return res.render('auth/teacherLogIn', {
+                error: 'You are not authorized as a teacher'
+            });
+        }
+
+        // Verify password
+        const passwordMatch = await bcrypt.compare(password, teacher.password);
+        if (!passwordMatch) {
+            return res.render('auth/teacherLogIn', {
+                error: 'Invalid email or password'
+            });
+        }
+
+        // Set session or token
+        req.session.teacher = {
+            id: teacher.teacher_id,
+            name: teacher.teacher_name,
+            email: teacher.email
+        };
+
+        // Redirect to teacher dashboard
+        res.redirect('/teacher/dashboard');
+
+    } catch (error) {
+        console.error('Login error:', error);
+        res.render('auth/teacherLogIn', {
+            error: 'An error occurred. Please try again.'
+        });
+    }
+  }
+
 
   static logout(req, res) {
     req.session.destroy();

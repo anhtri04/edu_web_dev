@@ -24,16 +24,22 @@ const Class = sequelize.define('Class', {
   },
   slug: {
     type: DataTypes.STRING(255),
-    allowNull: true, 
+    allowNull: false, 
+    unique: true,
   },
   teacher_id: {
     type: DataTypes.INTEGER,
-    allowNull: true,
+    allowNull: false,
     references: {
       model: 'teacher',
       key: 'teacher_id'
     },
     onDelete: 'SET NULL',
+  },
+  password: {
+    type: DataTypes.STRING(255),
+    allowNull: false, 
+    unique: false,
   },
 
 }, {
