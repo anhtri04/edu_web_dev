@@ -6,16 +6,24 @@
                     {{#each exams}}
                     <div class="col-sm-6 col-lg-4">
                         <div class="card-course-item">
-                            <a href="/course/{{this.slug}}">
-                                <img class="card-img-top" src="{{this.imageUrl}}" alt="{{this.class_name}}">
+                        {{#if ../course.slug}}
+                            <a href="/course/{{../course.slug}}/exam/{{this.slug}}">
+                                <img class="card-img-top" src="https://res.cloudinary.com/drcju4wci/image/upload/v1747587791/exams_rcswn8.jpg" alt="{{../course.class_name}}">
                             </a>
-                            <div class="card-body">
-                                <a href="/course/{{this.slug}}">
+                        {{else}}
+                            <img class="card-img-top" src="{{this.imageUrl}}" alt="{{../course.class_name}}" style="cursor: not-allowed;">
+                        {{/if}}
+                        <div class="card-body">
+                            {{#if ../course.slug}}
+                                <a href="/course/{{../course.slug}}/exam/{{this.slug}}">
                                     <h5 class="card-title">{{this.title}}</h5>
                                 </a>
-                                <p class="card-text">{{this.description}}</p>
-                                <a href="/course/{{this.slug}}" class="btn btn-primary">Enroll</a>
-                            </div>
+                            {{else}}
+                                <h5 class="card-title">{{this.title}}</h5>
+                            {{/if}}
+                            <p class="card-text">{{this.description}}</p>
+                            {{!-- <a href="/course/{{../course.slug}}/exam/{{this.slug}}" class="btn btn-primary">Enroll</a> --}}
+                        </div>
                         </div>
                     </div>
                     {{/each}}

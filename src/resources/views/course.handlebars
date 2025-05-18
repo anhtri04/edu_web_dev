@@ -8,7 +8,9 @@
                 <div class="col-sm-6 col-lg-4">
                     <div class="card-course-item">
                         <a href="/course/{{this.slug}}">
-                            <img class="card-img-top" src="{{this.imageUrl}}" alt="{{this.class_name}}">
+                            <img class="card-img-top" 
+                                 src="{{#if this.imageUrl}}{{this.imageUrl}}{{else}}https://res.cloudinary.com/drcju4wci/image/upload/v1747587790/How-to-create-an-online-course_obrvr0.jpg{{/if}}" 
+                                 alt="{{this.class_name}}">
                         </a>
                         <div class="card-body">
                             <a href="/course/{{this.slug}}">

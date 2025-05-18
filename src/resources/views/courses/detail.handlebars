@@ -1,9 +1,71 @@
-<div class="container">
-    <div class="col-sm-3">
-        <button type="submit">Enroll</button>
+
+<div class="cd-container">
+        <div class="cd-header">
+            <p class="cd-course-title">{{classes.class_name}}</p>
+            <div class="cd-teacher-info">
+                <div class="cd-teacher-image">DP</div>
+                <div>
+                    <div class="cd-teacher-name">{{teacher.teacher_name}}</div>
+                    <div class="cd-teacher-title">Professor of Computer Science</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cd-main-content">
+            <div class="cd-content-left">
+                <div class="cd-course-description">
+                    <h2 class="cd-heading">Course Description</h2>
+                    <p>{{classes.description}}</p>
+                </div>
+
+                <div class="cd-exams-section">
+                    <a href="/course/{{classes.slug}}/exam"><h2 class="cd-heading">Available Exams 🔎...</h2> </a>
+                                     
+                    {{#if exams.length}}
+                        {{#each exams}}                   
+                        <div class="cd-exam-item">
+                            <div>
+                                <div class="cd-exam-title">{{this.title}}</div>
+                                <div class="cd-exam-info">Bonus Assessment • 60 minutes</div>
+                            </div>
+                            <span class="cd-exam-badge">Available</span>
+                        </div>
+                        {{/each}}
+                    {{else}}
+                    <p class="no-courses">No exams available at the moment.</p>
+                    {{/if}}
+                </div>
+            </div>
+
+            <div class="cd-content-right">
+                <div class="cd-course-meta">
+                    <h2 class="cd-heading">Course Information</h2>
+                    <div class="cd-meta-item">
+                        <i>📚</i>
+                        <div>CS 402</div>
+                    </div>
+                    <div class="cd-meta-item">
+                        <i>⏰</i>
+                        <div>16 Weeks</div>
+                    </div>
+                    <div class="cd-meta-item">
+                        <i>📝</i>
+                        <div>4 Credits</div>
+                    </div>
+                    <div class="cd-meta-item">
+                        <i>📊</i>
+                        <div>Advanced Level</div>
+                    </div>
+                    <div class="cd-meta-item">
+                        <i>👥</i>
+                        <div>42 Enrolled Students</div>
+                    </div>
+                    
+                    <div class="cd-course-actions">
+                        <a href="#" class="cd-btn cd-btn-primary">Enroll in class</a>
+                        <a href="#" class="cd-btn cd-btn-secondary">Contact Instructor</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-sm-9">
-        <h1>{{classes.class_name}}</h1>
-        <h2>{{classes.description}}</h2>
-    </div>
-</div>

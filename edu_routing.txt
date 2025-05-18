@@ -25,3 +25,5 @@ http://localhost:3000/student/course/:slug
 http://localhost:3000/student/course/:slug/exam
 http://localhost:3000/student/course/:slug/exam/:slug
 http://localhost:3000/student/course/:slug/exam/submission
+
+$2b$10$inUP2By5gcPFrC4cIIXXJeNge51OM.tcizgAelmBLCHoiumr7S9/a

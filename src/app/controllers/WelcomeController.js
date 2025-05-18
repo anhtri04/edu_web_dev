@@ -18,7 +18,7 @@ class WelcomeController {
       if (!req.session.teacher) {
         return res.redirect('/login/teacher');
     }
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
       res.render('teacherView/dashboard', {teacher: req.session.teacher})
     }
 

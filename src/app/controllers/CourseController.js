@@ -1,5 +1,7 @@
 const Class = require('../models/Class');
-const Enrollment = require('../models/Enrollment')
+const Enrollment = require('../models/Enrollment');
+const Exam = require('../models/Exam');
+const Teacher = require('../models/Teacher');
 const cloudinary = require('../../config/cloudinary');
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcrypt');
@@ -14,15 +16,28 @@ class CourseController{
             const classes = await Class.findOne({
                 where: { slug: req.params.slug }
             });
+            const exams = await Exam.findAll({
+                where: {
+                    class_id: classes.class_id
+                }           
+            });
+            const teacher = await Teacher.findOne({
+                where: {
+                    teacher_id: classes.teacher_id
+                }
+            });
 
             if (!classes) {
                 return res.status(404).send('Course not found');
               }
-              const plainClasses = classes.toJSON(); // to deal with Handlebars' strict prototype access restrictions 
-              res.render('courses/detail', { classes: plainClasses });
+              // to deal with Handlebars' strict prototype access restrictions 
+              const plainClasses = classes.toJSON();
+              const plainExams = exams.map(exam => exam.toJSON()); // Convert each exam to plain object
+              const plainTeacher = teacher.toJSON();
+              res.render('courses/detail', { classes: plainClasses, exams: plainExams, teacher: plainTeacher});
         } catch (error) {
             next(error);
-        }
+        }   
     }
 
     static show(req, res){

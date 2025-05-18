@@ -1,0 +1,158 @@
+<div class="ed-container">
+        <div class="ed-header">
+            <h1 class="ed-exam-title">{{exam.title}}</h1>
+            <div class="ed-exam-meta">
+                <div class="ed-exam-meta-item">
+                    <i>⏱️</i> Duration: {{exam.duration}} minutes
+                </div>
+                <div class="ed-exam-meta-item">
+                    <i>📚</i> {{exam.course.class_name}}
+                </div>
+                <div class="ed-exam-meta-item">
+                    <i>📝</i> {{exam.total_points}} Points
+                </div>
+            </div>
+        </div>
+
+        <div class="ed-main-content">
+            <div class="ed-content-left">
+                <div class="ed-exam-description">
+                    <h2 class="ed-heading">Exam Description</h2>
+                    <p>{{exam.description}}</p>
+                    
+                    {{#if exam.instructions}}
+                    <div class="ed-instructions">
+                        <h3>Instructions</h3>
+                        <p>{{exam.instructions}}</p>
+                    </div>
+                    {{/if}}
+                </div>
+
+                <div class="ed-materials-section">
+                    <h2 class="ed-heading">Exam Materials</h2>
+                    
+                    {{#if exam.materials.length}}
+                        {{#each exam.materials}}                   
+                        <div class="ed-material-item">
+                            <div>
+                                <div class="ed-material-title">{{this.title}}</div>
+                                <div class="ed-material-info">{{this.description}} • {{this.file_size}}</div>
+                            </div>
+                            <a href="{{this.file_url}}" class="ed-download-link">
+                                <i>📄</i> Download
+                            </a>
+                        </div>
+                        {{/each}}
+                    {{else}}
+                        <div class="ed-no-materials">No additional materials for this exam.</div>
+                    {{/if}}
+                </div>
+            </div>
+
+            <div class="ed-content-right">
+                <div class="ed-exam-sidebar">
+                    <h2 class="ed-heading">Exam Information</h2>
+                    
+                    <div class="ed-countdown">
+                        <div class="ed-timer-label">Time Remaining</div>
+                        <div class="ed-countdown-time">01:23:45</div>
+                    </div>
+                    
+                    <div class="ed-info-item">
+                        <i>📅</i>
+                        <div>Due: {{exam.due_date}}</div>
+                    </div>
+                    <div class="ed-info-item">
+                        <i>🔄</i>
+                        <div>Attempts: {{exam.attempts_used}}/{{exam.max_attempts}}</div>
+                    </div>
+                    <div class="ed-info-item">
+                        <i>📊</i>
+                        <div>Passing Score: {{exam.passing_score}}%</div>
+                    </div>
+                    
+                    <div class="ed-submission-form">
+                        <h3 class="ed-heading">Submit Your Work</h3>
+                        
+                        <div class="ed-upload-area" id="dropZone">
+                            <div class="ed-upload-icon">📤</div>
+                            <div class="ed-upload-text">Drag & drop files or click to upload</div>
+                            <div class="ed-upload-hint">Supported formats: PDF, DOCX, ZIP (max 10MB)</div>
+                            <input type="file" id="fileInput" style="display: none;">
+                        </div>
+                        
+                        <button type="button" class="ed-btn ed-btn-primary">Submit Exam</button>
+                    </div>
+                    
+                    <div class="ed-submitted-files">
+                        <h3 class="ed-heading">Submitted Files</h3>
+                        
+                        {{#if submitted_files.length}}
+                            {{#each submitted_files}}
+                            <div class="ed-file-preview">
+                                <div class="ed-file-info">
+                                    <div class="ed-file-icon">{{this.icon}}</div>
+                                    <div>
+                                        <div class="ed-file-name">{{this.filename}}</div>
+                                        <div class="ed-file-meta">{{this.size}} • {{this.upload_time}}</div>
+                                    </div>
+                                </div>
+                                <div class="ed-file-actions">
+                                    <button class="ed-action-btn">
+                                        <i>👁️</i>
+                                    </button>
+                                    <button class="ed-action-btn ed-action-remove">
+                                        <i>🗑️</i>
+                                    </button>
+                                </div>
+                            </div>
+                            {{/each}}
+                        {{else}}
+                            <div class="ed-no-files">No files submitted yet.</div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Simple script to handle file upload interaction
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropZone = document.getElementById('dropZone');
+            const fileInput = document.getElementById('fileInput');
+            
+            dropZone.addEventListener('click', function() {
+                fileInput.click();
+            });
+            
+            // Add drag and drop functionality
+            dropZone.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                dropZone.style.borderColor = '#4a86e8';
+            });
+            
+            dropZone.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                dropZone.style.borderColor = '#ddd';
+            });
+            
+            dropZone.addEventListener('drop', function(e) {
+                e.preventDefault();
+                dropZone.style.borderColor = '#ddd';
+                
+                if (e.dataTransfer.files.length) {
+                    fileInput.files = e.dataTransfer.files;
+                    // Here you would normally handle the file upload
+                    alert('File selected: ' + e.dataTransfer.files[0].name);
+                }
+            });
+            
+            fileInput.addEventListener('change', function() {
+                if (fileInput.files.length) {
+                    // Here you would normally handle the file upload
+                    alert('File selected: ' + fileInput.files[0].name);
+                }
+            });
+        });
+    </script>
