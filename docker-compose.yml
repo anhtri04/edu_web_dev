@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile.mysql
+    container_name: edu_mysql_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: '#BvOBV0332325650'
+      MYSQL_DATABASE: edu_db_dev
+      MYSQL_USER: eduuser
+      MYSQL_PASSWORD: edupass123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql.cnf:/etc/mysql/conf.d/mysql.cnf:ro
+      - ./docker/init-db.sql:/docker-entrypoint-initdb.d/init-db.sql:ro
+    networks:
+      - edu_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p#BvOBV0332325650"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+
+  # Optional: phpMyAdmin for database management
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: edu_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: '#BvOBV0332325650'
+      MYSQL_ROOT_PASSWORD: '#BvOBV0332325650'
+    ports:
+      - "8080:80"
+    networks:
+      - edu_network
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+networks:
+  edu_network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local

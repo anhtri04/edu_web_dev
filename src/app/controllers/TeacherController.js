@@ -6,7 +6,8 @@ const Submission = require('../models/Submission')
 
 class TeacherController {
     static show(req, res) {
-        res.render('teacherView/detailCourse', {Class, Enrollment, Submission});
+        // Return JSON response with available models
+        res.json({ message: 'Teacher detail course endpoint', models: ['Class', 'Enrollment', 'Submission'] });
     }
     
     static async getClassDashboard(req, res) {
@@ -26,7 +27,7 @@ class TeacherController {
         });
 
         if (!teacherClasses.length) {
-            return res.render('dashboard', {
+            return res.json({
                 teacherClasses: [],
                 class: null,
                 students: [],
@@ -40,7 +41,7 @@ class TeacherController {
             where: { slug, teacher_id: teacherId }
         });
         if (!classData) {
-            return res.status(404).render('error', { message: 'Class not found or unauthorized' });
+            return res.status(404).json({ message: 'Class not found or unauthorized' });
         }
 
         // Mark selected class
@@ -93,7 +94,7 @@ class TeacherController {
             uploadDate: r.uploadDate
         })));
 
-        res.render('dashboard', {
+        res.json({
             class: classData,
             teacherClasses,
             students,
@@ -102,7 +103,7 @@ class TeacherController {
         });
     } catch (error) {
         console.error('Dashboard error:', error.message, error.stack);
-        res.status(500).render('error', { message: 'Server error' });
+        res.status(500).json({ message: 'Server error', error: error.message });
     }
 }
 

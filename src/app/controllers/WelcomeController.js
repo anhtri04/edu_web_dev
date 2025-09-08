@@ -6,20 +6,20 @@ class WelcomeController {
     // GET /welcome
     static showWelcome(req, res) {
       console.log('GET /welcome route hit');
-      res.render('home', { title: 'Welcome', student: req.session.student });
+      res.json({ message: 'Welcome endpoint', student: req.session.student });
     }
 
     static showAccount(req, res) {
-      res.render('account/account', { title: 'Account', student: req.session.student }); 
+      res.json({ message: 'Account endpoint', student: req.session.student }); 
     }
 
     static dashboard(req, res) {
 
       if (!req.session.teacher) {
-        return res.redirect('/login/teacher');
-    }
+        return res.status(401).json({ message: 'Unauthorized. Please login as teacher.' });
+      }
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-      res.render('teacherView/dashboard', {teacher: req.session.teacher})
+      res.json({ message: 'Teacher dashboard endpoint', teacher: req.session.teacher });
     }
 
 

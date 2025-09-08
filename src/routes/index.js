@@ -8,6 +8,7 @@ const examRouter = require('./exam')
 const logoutRouter = require('./out')
 const teacherRouter = require('./teacher')
 const apiRouter = require('./api')
+const healthRouter = require('./health')
 
 function route(app) {
     
@@ -20,6 +21,7 @@ function route(app) {
     app.use('/signup', signUpRouter)
     app.use('/login', authRouter)
     app.use('/api', apiRouter)
+    app.use('/api', healthRouter)
     app.use('/logout', logoutRouter)
     app.use('/', welcomeRouter)
 

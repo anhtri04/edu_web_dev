@@ -30,18 +30,20 @@ class CourseController{
             if (!classes) {
                 return res.status(404).send('Course not found');
               }
-              // to deal with Handlebars' strict prototype access restrictions 
-              const plainClasses = classes.toJSON();
-              const plainExams = exams.map(exam => exam.toJSON()); // Convert each exam to plain object
-              const plainTeacher = teacher.toJSON();
-              res.render('courses/detail', { classes: plainClasses, exams: plainExams, teacher: plainTeacher});
+              // Return JSON response for API calls
+              return res.json({
+                classes: plainClasses,
+                exams: plainExams,
+                teacher: plainTeacher
+              });
         } catch (error) {
             next(error);
         }   
     }
 
     static show(req, res){
-        res.render('courses/createCourse', {Class});
+        // Return available models for course creation
+        return res.json({ status: 'success', message: 'Course creation endpoint' });
     }
 
 
@@ -50,7 +52,8 @@ class CourseController{
             const classes = await Class.findAll({
                 raw: true, // Optional: Returns plain JavaScript objects
             });
-            res.render('course', { classes });
+            // Return JSON response
+            res.json({ classes });
         } catch (error) {
             next(error);
         }

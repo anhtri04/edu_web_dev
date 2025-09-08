@@ -1,0 +1,27 @@
+# MySQL Docker Container for edu_web_dev
+FROM mysql:8.0
+
+# Set environment variables
+ENV MYSQL_ROOT_PASSWORD=#BvOBV0332325650
+ENV MYSQL_DATABASE=edu_db_dev
+ENV MYSQL_USER=eduuser
+ENV MYSQL_PASSWORD=edupass123
+
+# Create custom MySQL configuration
+COPY docker/mysql.cnf /etc/mysql/conf.d/
+
+# Create initialization script directory
+RUN mkdir -p /docker-entrypoint-initdb.d
+
+# Copy initialization scripts (if any)
+COPY docker/init-db.sql /docker-entrypoint-initdb.d/
+
+# Expose MySQL port
+EXPOSE 3306
+
+# Health check for MySQL service
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+  CMD mysqladmin ping -h localhost -u root -p$MYSQL_ROOT_PASSWORD || exit 1
+
+# Use default MySQL entrypoint
+CMD ["mysqld"]

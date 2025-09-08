@@ -18,7 +18,7 @@ class ExamController{
             //     }           
             // });
             
-            res.render('exam/examDetail');
+            res.json({ message: 'Exam detail endpoint' });
         } catch (error){
             next(error);
         }
@@ -29,14 +29,14 @@ class ExamController{
             const slug = req.params.slug;
             const course = await Class.findOne({ where: { slug } });
             if (!course) {
-                return res.status(404).render('error', { message: 'Course not found' });
+                return res.status(404).json({ message: 'Course not found' });
             }
             const exams = await Exam.findAll({
                 where: { class_id: course.class_id },
                 raw: true,
             });
             const coursePlain = course.toJSON();
-            res.render('exam/exam', { exams, course: coursePlain });
+            res.json({ exams, course: coursePlain });
         } catch (error) {
             console.error('List error:', error.message);
             next(error);
@@ -47,7 +47,7 @@ class ExamController{
 
         // Get the course slug from the URL
         const courseSlug = req.params.slug;
-        res.render('exam/createExam', {Exam, courseSlug});
+        res.json({ message: 'Create exam endpoint', courseSlug });
     }
 
     static async created(req, res, next) {

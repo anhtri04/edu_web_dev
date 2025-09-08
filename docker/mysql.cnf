@@ -1,0 +1,34 @@
+[mysqld]
+# Basic MySQL Configuration for edu_web_dev
+
+# Connection Settings
+max_connections = 200
+max_user_connections = 100
+
+# Character Set and Collation
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+
+# Performance Settings
+innodb_buffer_pool_size = 256M
+innodb_log_file_size = 64M
+innodb_flush_log_at_trx_commit = 2
+
+# Query Cache (if using MySQL < 8.0)
+# query_cache_type = 1
+# query_cache_size = 32M
+
+# Logging
+log_error = /var/log/mysql/error.log
+slow_query_log = 1
+slow_query_log_file = /var/log/mysql/slow.log
+long_query_time = 2
+
+# Security
+sql_mode = STRICT_TRANS_TABLES,NO_ZERO_DATE,NO_ZERO_IN_DATE,ERROR_FOR_DIVISION_BY_ZERO
+
+# Time Zone
+default_time_zone = '+00:00'
+
+[client]
+default-character-set = utf8mb4

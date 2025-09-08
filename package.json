@@ -4,9 +4,25 @@
   "description": "web-app for school management",
   "main": "src/index.js",
   "scripts": {
-    "start": "nodemon --inspect src/index.js",
-    "watch": "sass --watch src/resources/scss/app.scss:src/public/css/app.css",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "start:prod": "cross-env NODE_ENV=production node src/index.js",
+    "dev": "cross-env NODE_ENV=development nodemon --inspect src/index.js",
+    "prod": "cross-env NODE_ENV=production pm2 start src/index.js --name edu-web-api",
+
+    "test": "cross-env NODE_ENV=test jest",
+    "test:watch": "cross-env NODE_ENV=test jest --watch",
+    "test:coverage": "cross-env NODE_ENV=test jest --coverage",
+    "test:ci": "cross-env NODE_ENV=test jest --ci --coverage --watchAll=false",
+    "migrate": "node scripts/migrate.js",
+    "seed": "node scripts/seed.js",
+    "deploy": "npm run build:frontend && npm run start",
+    "build:frontend": "cd frontend && npm run build",
+    "install:all": "npm install && cd frontend && npm install",
+    "docker:mysql:start": "docker-compose up -d mysql",
+    "docker:mysql:stop": "docker-compose stop mysql",
+    "docker:mysql:logs": "docker-compose logs -f mysql",
+    "docker:down": "docker-compose down",
+    "docker:setup": "start-mysql.bat"
   },
   "repository": {
     "type": "git",
@@ -22,24 +38,29 @@
   },
   "homepage": "https://github.com/anhtri04/edu_web_dev#readme",
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.4",
+
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.6.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "express-handlebars": "^8.0.1",
+
     "multer": "^1.4.5-lts.2",
     "mysql2": "^3.14.1",
     "nodemon": "^3.1.9",
-    "sass": "^1.86.3",
+
     "sequelize": "^6.37.7",
     "sqlite3": "^5.1.7",
-    "tailwindcss": "^4.1.4",
+
     "uuid": "^11.1.0"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3",
+    "jest-junit": "^16.0.0",
     "express-session": "^1.18.1",
     "morgan": "^1.10.0",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "cross-env": "^7.0.3"
   }
 }

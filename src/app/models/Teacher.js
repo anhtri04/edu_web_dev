@@ -26,6 +26,43 @@ const Teacher = sequelize.define('Teacher', {
         isEmail: true,
       },
     },
+    phone: {
+      type: DataTypes.STRING(20),
+      allowNull: true,
+    },
+    department: {
+      type: DataTypes.STRING(100),
+      allowNull: true,
+    },
+    qualification: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    profile_picture: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      comment: 'URL to profile picture',
+    },
+    hire_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    last_login: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    is_active: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
+    office_location: {
+      type: DataTypes.STRING(100),
+      allowNull: true,
+    },
+    bio: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
   }, {
     tableName: 'teacher',
     timestamps: false,
